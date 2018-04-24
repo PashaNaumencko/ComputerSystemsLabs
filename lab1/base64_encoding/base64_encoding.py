@@ -7,6 +7,7 @@ def base64_encode(read_file_path, write_file_path):
         while len(data) % 3 != 0:
             data += bytes([0])
         for i in range(0, len(data), 3):
+            print(bin(data[i]), end=" ")
             base64_list += [data[i] >> 2]
             base64_list += [(data[i] & 3) << 4 | data[i + 1] >> 4]
             base64_list += [(data[i + 1] & 15) << 2 | data[i + 2] >> 6]
@@ -17,3 +18,4 @@ def base64_encode(read_file_path, write_file_path):
             base64_string = base64_string[:-last_char_index] + "=" * last_char_index
         with open(write_file_path, "w") as stream_for_write:
             stream_for_write.write(base64_string)
+
